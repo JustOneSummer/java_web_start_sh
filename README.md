@@ -2,7 +2,7 @@
 Java服务启动脚本
 
 - 把脚本文件改为可执行
-- - chmod r+x java_start.sh
+- - chmod +rx java_start.sh
 - 注册到chkconfig
 - - chkconfig --add java_start.sh
 - - chkconfig java_start.sh on
