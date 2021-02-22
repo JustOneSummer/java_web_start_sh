@@ -11,6 +11,10 @@ jarfile="${project_path}${jarName}"
 logfile="${jarfile}_${currenttime}.log"
 command="java -jar ${jarfile} --spring.config.location=${springbootConfig}"
 
+if [ "springbootConfig" == ""]; then
+    command = "java -jar ${jarfile}"
+fi
+
 echo "cmd $1"
 
 case "$1" in
