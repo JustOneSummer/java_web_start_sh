@@ -6,7 +6,7 @@ PROJECT_NAME="jar包名称"
 
 软链接.sh文件到 `/etc/init.d`
 
-`sudo ln -s 你的.sh文件路径 /etc/init.d`
+`sudo ln -s 你的.sh文件绝对路径 /etc/init.d`
 
 添加到开启自启
 
