@@ -18,10 +18,10 @@ JAVA_PATH="jdk-11.0.13/bin/java"
 PROJECT_NAME="AutoExtinguish.jar"
 echo $SYSTEM_PATH
 
-#nohup "$SYSTEM_PATH/$JAVA_PATH" -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >/dev/null 2>&1 &
+nohup "$SYSTEM_PATH/$JAVA_PATH" -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >/dev/null 2>&1 &
 
 # nohup run log
-nohup "$SYSTEM_PATH/$JAVA_PATH" -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >"$SYSTEM_PATH"/log.log &
+#nohup "$SYSTEM_PATH/$JAVA_PATH" -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >"$SYSTEM_PATH"/log.log &
 
 # no nohup run
 #"$SYSTEM_PATH/$JAVA_PATH" -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml
