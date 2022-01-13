@@ -1,4 +1,4 @@
-# java_web_start_sh
+# java_web_start_sh(已弃用)
 Java服务启动脚本
 
 - 把脚本文件改为可执行
