@@ -1,6 +1,6 @@
 #!/bin/sh
 # chkconfig: 2345 56 26
-# description: Redis Service
+# description: java Service
 
 ### BEGIN INIT INFO
 # Provides:          java-web
@@ -32,9 +32,9 @@ echo $SYSTEM_PATH
 pid_file="$SYSTEM_PATH/$PROJECT_NAME".pid
 
 function java_start() {
-    #nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >/dev/null 2>&1 &
+    nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >/dev/null 2>&1 &
 
-    nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >"$SYSTEM_PATH"/log.log &
+    #nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >"$SYSTEM_PATH"/log.log &
 
     #java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml
 
@@ -69,7 +69,7 @@ case "$1" in
 		;;
 	restart|reload)
 		java_stop
-		sleep 0.3
+		sleep 1
 		java_start
 		;;
 	*)
