@@ -36,6 +36,7 @@ function java_start() {
 
     #nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >"$SYSTEM_PATH"/log.log &
 
+    #jdk-version<=1.8 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
     #java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml
 
     # shellcheck disable=SC2181
