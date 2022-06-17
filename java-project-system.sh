@@ -12,7 +12,12 @@
 # Description:       starts the java-web
 ### END INIT INFO
 
-JAVA_HOME="/home/uuz/test/jdk-17.0.2"
+
+# system path
+#SYSTEM_PATH=$(dirname $(readlink -f "$0"))
+SYSTEM_PATH="/home/uuz/test"
+
+JAVA_HOME="$SYSTEM_PATH/jdk-17.0.2"
 export JAVA_HOME
 PATH="$JAVA_HOME/bin:$PATH"
 export PATH
@@ -20,10 +25,6 @@ export PATH
 java -version
 
 echo "start server...."
-
-# system path
-#SYSTEM_PATH=$(dirname $(readlink -f "$0"))
-SYSTEM_PATH="/home/uuz/test"
 
 # jar name
 PROJECT_NAME="system-web-0.0.1-SNAPSHOT.jar"
