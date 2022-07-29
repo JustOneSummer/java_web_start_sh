@@ -1,23 +1,10 @@
-#!/bin/sh
-# chkconfig: 2345 56 26
-# description: java Service
-
-### BEGIN INIT INFO
-# Provides:          java-web
-# Required-Start:    $all
-# Required-Stop:     $all
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: starts java-web
-# Description:       starts the java-web
-### END INIT INFO
-
+#!/bin/bash
 
 # system path
 #SYSTEM_PATH=$(dirname $(readlink -f "$0"))
-SYSTEM_PATH="/home/uuz/test"
+SYSTEM_PATH="/web"
 
-JAVA_HOME="$SYSTEM_PATH/jdk-17.0.2"
+JAVA_HOME="$SYSTEM_PATH/jdk-17.0.4+8"
 export JAVA_HOME
 PATH="$JAVA_HOME/bin:$PATH"
 export PATH
@@ -32,14 +19,22 @@ echo $SYSTEM_PATH
 
 pid_file="$SYSTEM_PATH/$PROJECT_NAME".pid
 
-function java_start() {
+function dev() {
+    java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml
+    java_start
+}
+
+function noHupLog() {
+    nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >"$SYSTEM_PATH"/log.log &
+    java_start
+}
+
+function noHupNoLog() {
     nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >/dev/null 2>&1 &
+    java_start
+}
 
-    #nohup java -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml >"$SYSTEM_PATH"/log.log &
-
-    #jdk-version<=1.8 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
-    #java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar "$SYSTEM_PATH/$PROJECT_NAME" --spring.config.location="$SYSTEM_PATH"/config/application.yml
-
+function java_start() {
     # shellcheck disable=SC2181
     if [[ $? -eq 0 ]]; then
         echo $! > ${pid_file}
@@ -60,8 +55,14 @@ function java_stop() {
 }
 
 case "$1" in
+  dev)
+    dev
+    ;;
+  log)
+    noHupLog
+    ;;
 	start)
-		java_start
+		noHupNoLog
 		;;
 	stop)
 		java_stop
@@ -72,7 +73,7 @@ case "$1" in
 	restart|reload)
 		java_stop
 		sleep 1
-		java_start
+		noHupNoLog
 		;;
 	*)
 		echo "Please use start or stop as first argument"
