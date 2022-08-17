@@ -3,8 +3,9 @@
 # system path
 #SYSTEM_PATH=$(dirname $(readlink -f "$0"))
 SYSTEM_PATH="/web"
-
 JAVA_HOME="$SYSTEM_PATH/jdk-17.0.4+8"
+PROJECT_NAME="system-web-0.0.1-SNAPSHOT.jar"
+
 export JAVA_HOME
 PATH="$JAVA_HOME/bin:$PATH"
 export PATH
@@ -13,8 +14,6 @@ java -version
 
 echo "start server...."
 
-# jar name
-PROJECT_NAME="system-web-0.0.1-SNAPSHOT.jar"
 echo $SYSTEM_PATH
 
 pid_file="$SYSTEM_PATH/$PROJECT_NAME".pid
