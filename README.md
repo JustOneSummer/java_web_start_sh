@@ -19,3 +19,6 @@ PROJECT_NAME="jar包名称"
 提供了三种启动方式,两种nohup一种远程调试的,自己根据情况去掉注释就行了
 
 启动方式也改了,现在是 *.sh start|stop|restart|reload
+
+### 修改可执行
+chmod +x xxx.sh
