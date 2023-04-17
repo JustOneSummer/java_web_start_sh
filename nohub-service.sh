@@ -42,7 +42,7 @@ function service_stop() {
         rm -f ${pid_file}
     else exit 1
     fi
-    echo "java stop ok"
+    echo "service stop ok"
 }
 
 case "$1" in
