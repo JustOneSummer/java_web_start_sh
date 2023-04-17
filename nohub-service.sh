@@ -56,7 +56,7 @@ case "$1" in
 		noHupNoLog
 		;;
 	stop)
-		java_stop
+		service_stop
 		;;
 	status)
 		redis_status
