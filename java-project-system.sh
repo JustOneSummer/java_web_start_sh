@@ -44,7 +44,8 @@ function java_start() {
 
 function java_stop() {
     # shellcheck disable=SC2046
-    kill -9 $(cat ${pid_file})
+    # kill -9 $(cat ${pid_file})
+    kill $(cat ${pid_file})
     # shellcheck disable=SC2181
     if [[ $? -eq 0 ]]; then
         rm -f ${pid_file}
