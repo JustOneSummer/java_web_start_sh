@@ -1,14 +1,13 @@
 #!/bin/bash
-
 # system path
 #ROOT_PATH=$(dirname $(readlink -f "$0"))
-ROOT_PATH="/web"
-JDK_NAME="jdk-17.0.4+8"
-JAR_NAME="system-web-0.0.1-SNAPSHOT.jar"
-CONFIG_PATH="--spring.config.location="$ROOT_PATH"/config/application.yml"
+ROOT_PATH="/root/wows"
+JDK_NAME="jdk-20.0.1"
+JAR_NAME="api-wows-0.0.1-SNAPSHOT.jar"
+CONFIG_PATH="--spring.config.location="$ROOT_PATH"/config/application.properties"
 
 
-JAVA_HOME="$SYSTEM_PATH/$JDK_NAME"
+JAVA_HOME="$ROOT_PATH/$JDK_NAME"
 export JAVA_HOME
 PATH="$JAVA_HOME/bin:$PATH"
 export PATH
@@ -19,20 +18,20 @@ echo "start server...."
 
 echo $ROOT_PATH
 
-pid_file="$ROOT_PATH/$PROJECT_NAME".pid
+pid_file="$ROOT_PATH/$JAR_NAME".pid
 
 function dev() {
-    java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar "$ROOT_PATH/$PROJECT_NAME $CONFIG_PATH"
+    java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar "$ROOT_PATH/$JAR_NAME" "$CONFIG_PATH"
     java_start
 }
 
 function noHupLog() {
-    nohup java -jar "$ROOT_PATH/$PROJECT_NAME" --spring.config.location="$ROOT_PATH"/config/application.yml >"$ROOT_PATH"/log.log &
+    nohup java -jar "$ROOT_PATH/$JAR_NAME" "$CONFIG_PATH" >"$ROOT_PATH"/log.log &
     java_start
 }
 
 function noHupNoLog() {
-    nohup java -jar "$ROOT_PATH/$PROJECT_NAME" $CONFIG_PATH >/dev/null 2>&1 &
+    nohup java -jar "$ROOT_PATH/$JAR_NAME" "$CONFIG_PATH" >/dev/null 2>&1 &
     java_start
 }
 
